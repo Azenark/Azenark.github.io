@@ -131,6 +131,7 @@
                 document.getElementById('loginTitle').classList.add('hidden');
                 document.getElementById('loginForm').classList.add('hidden');
                 document.getElementById('createEmailSection').classList.remove('hidden');
+                document.getElementById('aolEmailUI').classList.remove('hidden'); // Show AOL-like UI on login
             } else {
                 alert('Invalid username or password');
             }
@@ -140,6 +141,7 @@
             // Hide create email button and show email input fields
             document.getElementById('createEmailButton').classList.add('hidden');
             document.getElementById('emailForm').classList.remove('hidden');
+            document.getElementById('aolEmailUI').classList.remove('hidden'); // Show AOL-like UI when creating email
         });
 
         document.getElementById('sendEmailButton').addEventListener('click', function() {
