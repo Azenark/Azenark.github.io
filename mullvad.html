@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempSMS - Squidward Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubbler+One&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #add8e6; /* Light blue background */
+            font-family: 'Bubbler One', sans-serif; /* Bubbly font */
+            color: #333; /* Text color */
+        }
+        .nav {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .nav button {
+            margin-right: 10px;
+            padding: 10px 15px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .nav button:hover {
+            background-color: #555; /* Darker on hover */
+        }
+        h1 {
+            font-size: 2.5em; /* Title size */
+        }
+        h2 {
+            font-size: 1.5em; /* Subtitle size */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], textarea {
+            width: 300px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #333; /* Border color */
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #555; /* Darker on hover */
+        }
+        .divider {
+            width: 100%;
+            height: 2px;
+            background-color: #333; /* Divider color */
+            margin-top: 20px;
+        }
+        .cow-image {
+            margin-bottom: 20px; /* Spacing below the image */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <button onclick="window.location.href='http://squidwardproject.com/donate.html'">Donate</button>
+        <button onclick="window.location.href='http://squidwardproject.com/sign-up.html'">Sign Up</button>
+        <button onclick="window.location.href='http://squidwardproject.com/sign-in.html'">Sign In</button>
+    </div>
+
+    <img class="cow-image" src="https://www.pinclipart.com/picdir/big/141-1413251_flying-cow-illustration-clipart.png" alt="Flying Cow" width="150"> <!-- Cow image added here -->
+
+    <h1>TempSMS - Squidward Project</h1>
+
+    <h2>Create an Email</h2>
+    <form id="createEmailForm">
+        <input type="text" id="newEmail" placeholder="youremail@squidwardproject.com" required>
+        <button type="submit">Create Email</button>
+    </form>
+
+    <div class="divider"></div>
+
+    <h2>Create an Account</h2>
+    <form id="createAccountForm">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Create Account</button>
+    </form>
+
+    <div class="divider"></div>
+
+    <h2>Send an Email</h2>
+    <form id="sendEmailForm">
+        <input type="email" id="recipient" placeholder="Recipient Email" required>
+        <textarea id="message" rows="4" placeholder="Enter your message" required></textarea>
+        <button type="submit">Send Email</button>
+    </form>
+
+    <script>
+        // Handle account creation
+        document.getElementById('createAccountForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            fetch('http://localhost:3000/create-account', { // Update to your server URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error creating account');
+            });
+        });
+
+        // Handle email creation
+        document.getElementById('createEmailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const emailName = document.getElementById('newEmail').value;
+            const fullEmail = emailName + '@squidwardproject.com';
+            
+            // Example subject and message
+            const subject = 'Your new email account';
+            const message = `Your email account has been created: ${fullEmail}`;
+
+            fetch('http://localhost:3000/send-email', { // Update to your server URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    recipient: fullEmail,
+                    subject: subject,
+                    message: message,
+                }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Email sent: ' + data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error sending email');
+            });
+        });
+
+        // Handle sending email
+        document.getElementById('sendEmailForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const recipient = document.getElementById('recipient').value;
+            const message = document.getElementById('message').value;
+
+            fetch('http://localhost:3000/send-email', { // Update to your server URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    recipient: recipient,
+                    subject: 'Message from TempSMS',
+                    message: message,
+                }),
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert('Email sent: ' + data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('Error sending email');
+            });
+        });
+    </script>
+</body>
+
+</html>
 
