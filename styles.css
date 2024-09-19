@@ -1,0 +1,16 @@
+body {
+    /* Black and white gradient background */
+    background: linear-gradient(to bottom, black, white);
+    color: white; /* Text color */
+    font-family: 'Bubblegum Sans', cursive; /* Bubble font */
+    padding: 20px; /* Padding for aesthetics */
+}
+
+/* Adding some styles for headings and paragraphs */
+h1, h2, h3 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+p {
+    line-height: 1.6;
+}
