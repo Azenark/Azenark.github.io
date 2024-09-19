@@ -56,6 +56,12 @@
             width: 400px; /* Set a width */
             max-width: 100%; /* Responsive */
         }
+        #divider {
+            width: 100%;
+            height: 1px;
+            background-color: #ccc; /* Divider color */
+            margin: 20px 0; /* Spacing around the divider */
+        }
         #createEmailSection {
             margin-top: 20px; /* Spacing for Create Email button */
         }
@@ -78,6 +84,7 @@
         <h2>Compose Email</h2>
         <input type="email" id="recipient" placeholder="Recipient Email" required>
         <input type="text" id="subject" placeholder="Email Subject" required>
+        <div id="divider"></div> <!-- Divider added here -->
         <textarea id="body" rows="4" placeholder="Email Body" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
         <button id="sendEmailButton">Send Email</button>
     </div>
@@ -121,3 +128,4 @@
 </body>
 
 </html>
+
