@@ -65,6 +65,23 @@
         #createEmailSection {
             margin-top: 20px; /* Spacing for Create Email button */
         }
+        #aolEmailUI {
+            display: none; /* Initially hidden */
+            background-color: #ffffff; /* White background */
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            width: 400px; /* Set a width */
+            max-width: 100%; /* Responsive */
+            margin-top: 20px; /* Spacing above AOL UI */
+        }
+        .email-header {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .email-content {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -87,6 +104,15 @@
         <div id="divider"></div> <!-- Divider added here -->
         <textarea id="body" rows="4" placeholder="Email Body" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
         <button id="sendEmailButton">Send Email</button>
+    </div>
+
+    <div id="aolEmailUI" class="hidden">
+        <div class="email-header">AOL-like Email Interface</div>
+        <div class="email-content">
+            <p><strong>Recipient:</strong> <span id="aolRecipient"></span></p>
+            <p><strong>Subject:</strong> <span id="aolSubject"></span></p>
+            <p><strong>Body:</strong> <span id="aolBody"></span></p>
+        </div>
     </div>
 
     <script>
@@ -117,15 +143,20 @@
         });
 
         document.getElementById('sendEmailButton').addEventListener('click', function() {
-            // Logic for sending email would go here
             const recipient = document.getElementById('recipient').value;
             const subject = document.getElementById('subject').value;
             const body = document.getElementById('body').value;
+
+            // Display email information in AOL-like UI
+            document.getElementById('aolRecipient').textContent = recipient;
+            document.getElementById('aolSubject').textContent = subject;
+            document.getElementById('aolBody').textContent = body;
+            document.getElementById('emailForm').classList.add('hidden'); // Hide email form
+            document.getElementById('aolEmailUI').classList.remove('hidden'); // Show AOL-like UI
+
             alert(`Email sent to: ${recipient}\nSubject: ${subject}\nBody: ${body}`);
-            // Add actual email sending logic here
         });
     </script>
 </body>
 
 </html>
-
