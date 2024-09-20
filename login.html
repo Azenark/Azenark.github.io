@@ -18,13 +18,17 @@
             font-family: 'Bubbler One', sans-serif;
             color: #333;
         }
+
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
         }
-        input[type="text"], input[type="password"], input[type="email"] {
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
             width: 300px;
             padding: 10px;
             margin: 10px 0;
@@ -32,6 +36,7 @@
             border-radius: 5px;
             font-size: 1em;
         }
+
         button {
             padding: 10px 20px;
             background-color: #007bff; /* Primary button color */
@@ -41,12 +46,15 @@
             cursor: pointer;
             font-size: 1em;
         }
+
         button:hover {
             background-color: #0056b3; /* Darker on hover */
         }
+
         .hidden {
             display: none;
         }
+
         #emailForm {
             display: none; /* Initially hidden */
             background-color: white; /* White background for email form */
@@ -56,15 +64,18 @@
             width: 400px; /* Set a width */
             max-width: 100%; /* Responsive */
         }
+
         #divider {
             width: 100%;
             height: 1px;
             background-color: #ccc; /* Divider color */
             margin: 20px 0; /* Spacing around the divider */
         }
+
         #createEmailSection {
             margin-top: 20px; /* Spacing for Create Email button */
         }
+
         #aolEmailUI {
             display: none; /* Initially hidden */
             background-color: #ffffff; /* White background */
@@ -75,10 +86,12 @@
             max-width: 100%; /* Responsive */
             margin-top: 20px; /* Spacing above AOL UI */
         }
+
         .email-header {
             font-weight: bold;
             margin-bottom: 10px;
         }
+
         .email-content {
             margin-top: 10px;
         }
@@ -101,7 +114,7 @@
         <h2>Compose Email</h2>
         <input type="email" id="recipient" placeholder="Recipient Email" required>
         <input type="text" id="subject" placeholder="Email Subject" required>
-        <div id="divider"></div> <!-- Divider added here -->
+        <div id="divider"></div>
         <textarea id="body" rows="4" placeholder="Email Body" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
         <button id="sendEmailButton">Send Email</button>
     </div>
@@ -121,27 +134,22 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Retrieve stored credentials
             const storedUsername = localStorage.getItem('username');
             const storedPassword = localStorage.getItem('password');
 
             if (username === storedUsername && password === storedPassword) {
                 alert('Login successful!');
-                // Hide login title and form, show create email button
                 document.getElementById('loginTitle').classList.add('hidden');
                 document.getElementById('loginForm').classList.add('hidden');
                 document.getElementById('createEmailSection').classList.remove('hidden');
-                document.getElementById('aolEmailUI').classList.remove('hidden'); // Show AOL-like UI on login
             } else {
                 alert('Invalid username or password');
             }
         });
 
         document.getElementById('createEmailButton').addEventListener('click', function() {
-            // Hide create email button and show email input fields
             document.getElementById('createEmailButton').classList.add('hidden');
             document.getElementById('emailForm').classList.remove('hidden');
-            document.getElementById('aolEmailUI').classList.remove('hidden'); // Show AOL-like UI when creating email
         });
 
         document.getElementById('sendEmailButton').addEventListener('click', function() {
@@ -149,12 +157,11 @@
             const subject = document.getElementById('subject').value;
             const body = document.getElementById('body').value;
 
-            // Display email information in AOL-like UI
             document.getElementById('aolRecipient').textContent = recipient;
             document.getElementById('aolSubject').textContent = subject;
             document.getElementById('aolBody').textContent = body;
-            document.getElementById('emailForm').classList.add('hidden'); // Hide email form
-            document.getElementById('aolEmailUI').classList.remove('hidden'); // Show AOL-like UI
+            document.getElementById('emailForm').classList.add('hidden');
+            document.getElementById('aolEmailUI').classList.remove('hidden');
 
             alert(`Email sent to: ${recipient}\nSubject: ${subject}\nBody: ${body}`);
         });
